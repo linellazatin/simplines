@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lines.</title>
+  <meta name="description" content="Cloud, infra, dev, and a bit of everything in between." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..600;1,300..600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Brief startup flash, mirrors camalyn.org's load-in. Pure decoration, removes itself. -->
+  <div class="tv-flash" aria-hidden="true"></div>
+
+  <!-- Honest scroll indicator: fill width always equals real scroll position, nothing more. -->
+  <div class="progress-rail" aria-hidden="true">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <button type="button" id="markToggle" class="mark" aria-haspopup="dialog" aria-expanded="false" aria-controls="contactPanel"><img src="assets/img/svg/logo.svg" alt="" /></button>
+
+  <div id="contactPanel" class="contact-panel" role="dialog" aria-label="Contact" hidden></div>
+
+  <main id="content">
+    <section class="hero" id="hero">
+      <p class="tagline" id="heroTagline"></p>
+      <p class="hero-sub" id="heroSub"></p>
+    </section>
+
+    <section class="block" id="skills">
+      <h2 class="block-label">Skills</h2>
+      <p class="skills-line" id="skillsLine"></p>
+    </section>
+
+    <section class="block" id="work">
+      <h2 class="block-label">Work</h2>
+      <ul class="entries" id="workList"></ul>
+    </section>
+
+    <section class="block" id="projects">
+      <h2 class="block-label">Personal Projects</h2>
+      <ul class="entries" id="projectsList"></ul>
+    </section>
+
+    <section class="block" id="education">
+      <h2 class="block-label">Education</h2>
+      <ul class="entries" id="educationList"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p id="footerLine"></p>
+  </footer>
+
+  <script src="scripts/content.js"></script>
+  <script src="scripts/script.js"></script>
+</body>
+</html>

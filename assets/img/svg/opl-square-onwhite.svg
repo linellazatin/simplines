@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- openlines-square-black-1440 -->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1095 1095"
+  width="1095"
+  height="1095"
+>
+  <!-- Smooth rounded-square boundary -->
+  <rect
+    x="86"
+    y="86"
+    width="928"
+    height="928"
+    rx="150"
+    ry="150"
+    fill="#fffeff"
+  />
+
+  <!-- Openlines mark -->
+  <g transform="translate(191.24 265.15) scale(0.6345)">
+    <path
+      d="M 914 180
+         C 850 270 790 370 700 470
+         C 620 560 560 650 470 700
+         C 350 770 210 715 190 590
+         C 170 470 250 350 370 340
+         C 500 330 610 390 700 470
+         C 770 530 780 650 850 690
+         C 885 710 915 700 935 680"
+      fill="none"
+      stroke="#050505"
+      stroke-width="42"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </g>
+</svg>
