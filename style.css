@@ -1,7 +1,8 @@
 /* =====================================================================
    Design language borrowed from camalyn.org: pure black, pale cream
    type, No filled cards, no shadows, no loud color - quiet typography 
-   and generous space carry the page.
+   and generous space carry the page. Inter keeps the companion sites
+   visually connected while weight and scale preserve hierarchy.
    ===================================================================== */
 
 :root {
@@ -10,12 +11,11 @@
   --text-dim: rgba(255, 255, 224, 0.55);
   --text-faint: rgba(255, 255, 224, 0.32);
   --hairline: rgba(255, 255, 224, 0.12);
-  --serif: "Newsreader", Georgia, serif;
-  --sans: "Inter", system-ui, sans-serif;
+  --type: "Inter", system-ui, sans-serif;
 
-  --accent-green: #7fae86;
-  --accent-yellow: #c9b06b;
-  --accent-orange: #c98a5b;
+  --accent-green: #b8e986;
+  --accent-yellow: #b8e986;
+  --accent-orange: #b8e986;
 
   --gap: clamp(4rem, 12vh, 8rem);
 }
@@ -33,9 +33,9 @@ html {
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: var(--sans);
+  font-family: var(--type);
   font-weight: 300;
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -97,8 +97,8 @@ a:focus-visible {
   top: calc(20px + env(safe-area-inset-top));
   right: calc(20px + env(safe-area-inset-right));
   z-index: 20;
-  width: 10%;
-  height: 10%;
+  width: clamp(2.25rem, 5vw, 3rem);
+  height: clamp(2.25rem, 5vw, 3rem);
   padding: 0;
   display: flex;
   align-items: center;
@@ -144,7 +144,8 @@ a:focus-visible {
 }
 
 .contact-panel .contact-name {
-  font-family: var(--serif);
+  font-family: var(--type);
+  font-weight: 500;
   font-size: 1.4rem;
   margin-bottom: 0.6rem;
 }
@@ -183,10 +184,11 @@ a:focus-visible {
 }
 
 .tagline {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(1.6rem, 5vw, 3.2rem);
-  line-height: 1.4;
+  font-family: var(--type);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  line-height: 1.16;
   max-width: 16ch;
 }
 
@@ -219,7 +221,7 @@ main {
 }
 
 .block-label {
-  font-family: var(--sans);
+  font-family: var(--type);
   font-weight: 400;
   font-size: 0.8rem;
   letter-spacing: 0.12em;
@@ -239,8 +241,10 @@ main {
   display: flex;
   align-items: baseline;
   gap: 0.6rem;
-  font-family: var(--serif);
-  font-size: 1.25rem;
+  font-family: var(--type);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  font-size: 1.18rem;
 }
 
 .entry-title .dot {
@@ -263,9 +267,9 @@ main {
 
 .entry-note {
   margin-top: 0.5rem;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1rem;
+  font-family: var(--type);
+  /* font-style: italic; */
+  font-size: 0.95rem;
   color: var(--text-dim);
   max-width: 46ch;
 }
