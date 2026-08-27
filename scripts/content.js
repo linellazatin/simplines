@@ -115,5 +115,20 @@ const SKILLS = [
   "Consultancy", "IT Service Management", "System Administration",
 ];
 
+const ADDITIONAL_CONTENT = [
+  {
+    id: "more-project",
+    text: "more",
+    section: "projects",
+    url: "https://github.com/linellazatin",
+  },
+  // {
+  //   id: "more-work",
+  //   text: "more",
+  //   section: "work",
+  //   url: "",
+  // },
+];
+
 // Current role is derived from the first WORK entry so the two never drift.
 PROFILE.role = WORK[0]?.title || "";

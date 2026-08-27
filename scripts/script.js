@@ -16,13 +16,13 @@ function renderHero() {
     document.title = `${PROFILE.nickname}`;
   }
 
-function renderEntry(item, { withUrl } = {}) {
+function renderEntry(item, { withUrl = false } = {}) {
   const li = el("li", "entry");
 
   const title = el("div", "entry-title");
   if (item.accent) title.appendChild(el("span", `dot ${item.accent}`));
   const titleText = withUrl && item.url ? el("a") : el("span");
-  titleText.textContent = item.title;
+  titleText.textContent = item.title || item.text;
   if (withUrl && item.url) {
     titleText.href = item.url;
     titleText.target = "_blank";
@@ -45,7 +45,11 @@ function renderEntry(item, { withUrl } = {}) {
 
 function renderList(id, items, opts) {
   const list = document.getElementById(id);
+  const section = id.endsWith("List") ? id.slice(0, -4) : id;
   items.forEach((item) => list.appendChild(renderEntry(item, opts)));
+  ADDITIONAL_CONTENT
+    .filter((item) => item.section === section)
+    .forEach((item) => list.appendChild(renderEntry(item, { ...opts, withUrl: true })));
 }
 
 function renderSkills() {
