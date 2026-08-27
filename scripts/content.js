@@ -8,7 +8,7 @@ const PROFILE = {
   tagline: "Cloud, infra, dev, and a bit of everything in between.",
   social: [
     { label: "GitHub", url: "https://github.com/linellazatin" },
-    { label: "openlines", url: "" },
+    { label: "openlines", url: "https://openlines.dev" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/linesl" },
   ],
 };
