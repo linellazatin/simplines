@@ -13,9 +13,9 @@
   --hairline: rgba(255, 255, 224, 0.12);
   --type: "Inter", system-ui, sans-serif;
 
-  --accent-green: #b8e986;
-  --accent-yellow: #b8e986;
-  --accent-orange: #b8e986;
+  --accent-green: #acff59;
+  --accent-yellow: #f1e53a;
+  --accent-orange: #e38e2d;
 
   --gap: clamp(4rem, 12vh, 8rem);
 }

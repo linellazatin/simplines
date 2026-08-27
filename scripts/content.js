@@ -74,6 +74,13 @@ const EDUCATION = [
 
 const PROJECTS = [
   {
+    title: "nanomneme",
+    url: "https://github.com/linellazatin/nanomneme",
+    period: "Aug 2026 (new)",
+    note: "small, deterministic SQLite memory store for people and agents (FTS5/BM25)",
+    accent: "green",
+  },
+  {
     title: "opl-pi-sht",
     url: "https://github.com/linellazatin/opl-pi-sht",
     period: "Aug 2026",
@@ -84,14 +91,14 @@ const PROJECTS = [
     title: "openlines-skills",
     url: "https://github.com/linellazatin/openlines-skills",
     period: "Aug 2026",
-    note: "Harness-agnostic skills - for the undecided (WIP)",
+    note: "Harness-agnostic skills - for the undecided",
     accent: "green",
   },
   {
     title: "openpi-memory",
     url: "https://github.com/linellazatin/openpi-memory",
     period: "Aug 2026",
-    note: "Open. Configurable. Global persistent memory for pi - openclaude-memory fork.",
+    note: "Open. Configurable. Global persistent memory for pi - openclaude-memory fork",
     accent: "green",
   },
   {
@@ -105,7 +112,7 @@ const PROJECTS = [
     title: "piper-tts-reader",
     url: "https://github.com/linellazatin/piper-tts-reader",
     period: "Jul 2026",
-    note: "For VSCode/Codium - TTS model extension. Local-first. Offline. Minimal. Developer-focused.",
+    note: "For VSCode/Codium - TTS model extension. Local-first. Offline. Minimal. Developer-focused",
     accent: "yellow",
   }
 ];
