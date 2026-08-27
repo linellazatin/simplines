@@ -2,8 +2,8 @@
 
 A static, data-driven personal site. Design language is carried over from
 [camalyn.org](https://www.camalyn.org): pure black `#000` background, pale
-cream `#ffffe0` text, Cormorant Garamond (serif, statements) + IBM Plex Sans
-(sans, everything else), no filled cards, no shadows, no loud color — quiet
+cream `#ffffe0` text, Inter throughout, no filled cards, no shadows, no loud
+color — quiet
 typography and generous whitespace do the work.
 
 ## Files
@@ -18,7 +18,7 @@ No HTML/CSS/JS changes needed per entry. The page monogram (top-right) and
 `<title>` are derived automatically from `PROFILE.name`.
 
 ## What was preserved from camalyn.org
-- Black/cream palette, serif+sans pairing, generous negative space
+- Black/cream palette, single-family Inter typography, generous negative space
 - The brief white "startup flash" on load
 - A quiet top-right monogram that opens a contact panel (bottom-left, barely-tinted, plain text — no card/shadow)
 - No buttons, badges, or filled backgrounds anywhere in the content
