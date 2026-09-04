@@ -1,62 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lines.</title>
-  <meta name="description" content="Cloud, infra, dev, and a bit of everything in between." />
+  <meta name="description" content="Cloud infrastructure, systems reliability, and developer tools.">
   <link rel="icon" href="assets/img/svg/logo.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Brief startup flash, mirrors camalyn.org's load-in. Pure decoration, removes itself. -->
-  <div class="tv-flash" aria-hidden="true"></div>
-
-  <!-- Honest scroll indicator: fill width always equals real scroll position, nothing more. -->
-  <div class="progress-rail" aria-hidden="true">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-
-  <button type="button" id="markToggle" class="mark" aria-haspopup="dialog" aria-expanded="false" aria-controls="contactPanel"><img src="assets/img/svg/opl-mark-white.svg" alt="" /></button>
-
-  <div id="contactPanel" class="contact-panel" role="dialog" aria-label="Contact" hidden></div>
-
-  <main id="content">
-    <section class="hero" id="hero">
-      <p class="tagline" id="heroTagline"></p>
-      <p class="hero-sub" id="heroSub"></p>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Resume home"><img src="assets/img/svg/logo.svg" alt=""><span id="brandName"></span></a>
+    <nav id="siteNav" aria-label="Contact links"></nav>
+  </header>
+  <main id="top">
+    <section class="hero" aria-labelledby="heroTitle">
+      <p class="eyebrow">cv</p>
+      <h1 id="heroTitle"></h1>
+      <p class="intro" id="heroSummary"></p>
+      <p class="location-line" id="profileMeta"></p>
+      <p class="skill-line"><span class="eyebrow">focus</span><span id="skillsLine"></span></p>
     </section>
-
-    <section class="block" id="skills">
-      <h2 class="block-label">Skills</h2>
-      <p class="skills-line" id="skillsLine"></p>
-    </section>
-
-    <section class="block" id="work">
-      <h2 class="block-label">Work</h2>
-      <ul class="entries" id="workList"></ul>
-    </section>
-
-    <section class="block" id="projects">
-      <h2 class="block-label">Personal Projects</h2>
-      <ul class="entries" id="projectsList"></ul>
-    </section>
-
-    <section class="block" id="education">
-      <h2 class="block-label">Education</h2>
-      <ul class="entries" id="educationList"></ul>
-    </section>
+    <details class="resume-section" id="work-section" open>
+      <summary><span class="section-title" id="work-title"></span><span class="section-state" aria-hidden="true"></span></summary>
+      <div class="section-body"><ul class="record-list" id="featured-work"></ul><details class="archive" id="work-disclosure"><summary id="work-summary"></summary><ul class="record-list" id="more-work"></ul></details></div>
+    </details>
+    <details class="resume-section" id="projects-section" open>
+      <summary><span class="section-title" id="projects-title"></span><span class="section-state" aria-hidden="true"></span></summary>
+      <div class="section-body"><ul class="record-list" id="featured-projects"></ul><details class="archive" id="projects-disclosure"><summary id="projects-summary"></summary><ul class="record-list" id="more-projects"></ul></details><a class="catalogue-link" id="projects-link" hidden></a></div>
+    </details>
+    <details class="resume-section" id="education-section" open>
+      <summary><span class="section-title" id="education-title"></span><span class="section-state" aria-hidden="true"></span></summary>
+      <div class="section-body"><ul class="record-list" id="featured-education"></ul><details class="archive" id="education-disclosure"><summary id="education-summary"></summary><ul class="record-list" id="more-education"></ul></details></div>
+    </details>
   </main>
-
-  <footer class="site-footer">
-    <p id="footerLine"></p>
-  </footer>
-
+  <footer><span id="footerName"></span><span id="footerYear"></span></footer>
   <script src="scripts/content.js"></script>
   <script src="scripts/script.js"></script>
 </body>

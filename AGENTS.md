@@ -1,81 +1,61 @@
-# simplines — Repository Guide
+# Repository Guidelines
 
-## What this is
+## Project Structure & Module Organization
 
-A minimal, data-driven personal portfolio website built with pure HTML, CSS, and vanilla JavaScript. The design follows a "Quiet Precision" aesthetic — monochrome, typography-focused, and free of theatrical effects. The entire site is static and deployable to any static hosting platform (e.g., Cloudflare Pages, Netlify, Vercel).
+This is a static, one-page résumé site. There is no package manifest, build
+pipeline, backend, or framework.
 
-## Commands
+- `index.html` is the semantic page shell and loads data before the renderer.
+- `scripts/content.js` is the editable source of truth for profile data,
+  sections, skills, and résumé records. Use `featured: true` for items shown
+  before an archive disclosure.
+- `scripts/script.js` hydrates the shell and separates featured and archived
+  records. Keep it generic; do not add entry-specific HTML here.
+- `style.css` owns the responsive Openlines-derived visual system.
+- `assets/img/` contains the logo and supporting SVG/PNG variants.
+- `tests/resume-renderer.test.js` is a Node assertion for renderer behavior.
 
-There are **no build, lint, or typecheck commands**. The site runs directly from the files.
+## Build, Test, and Development Commands
 
-To preview locally:
+No install or build step is required. Preview the root over HTTP:
 
-```bash
-# Option 1: Simple static server
-npx serve .
-
-# Option 2: Python
-python -m http.server 8000
+```sh
+python3 -m http.server 8000
 ```
 
-Open `http://localhost:8000` (or your chosen port) in a browser.
+Then open `http://localhost:8000`. Run the lightweight checks before handing
+off a change:
 
-## Architecture
-
-The site uses a **declarative data architecture**:
-
-- **`content.js`**: The single source of truth for all site text and metadata (intro, about, projects, contact).
-- **`main.js`**: A minimal hydration script that reads `content.js` and injects it into the DOM.
-- **`style.css`**: Pure CSS with CSS variables for theming. No preprocessor or framework.
-- **`index.html`**: A semantic, fixed-width layout with a sticky navigation bar.
-
-**No build pipeline.** All files are self-contained and can be edited independently.
-
-## Configuration and installation
-
-**No installation required.** The repository is ready to deploy as-is.
-
-To customize, simply edit `content.js`:
-
-```javascript
-window.content = {
-  intro: "Your headline here.",
-  about: "Your bio text here.",
-  projects: [
-    { title: "Project A", description: "Short description", url: "#" },
-    // ...
-  ],
-  contact: {
-    email: "you@example.com",
-    socials: ["twitter", "github"]
-  }
-};
+```sh
+node tests/resume-renderer.test.js
+node --check scripts/content.js
+node --check scripts/script.js
+git diff --check
 ```
 
-## Testing and operational quirks
+## Coding Style & Naming Conventions
 
-- **ES Modules are not used.** The architecture avoids `type="module"` to ensure compatibility in all preview environments (including `file://` URLs).
-- **No external libraries.** The site is entirely self-contained — no CDN calls, no framework dependencies.
-- **Smooth scrolling** is enabled via CSS (`scroll-behavior: smooth`), which may be disabled in some browser security modes.
-- **Icons** are provided in both SVG and PNG formats under `assets/img/`. The site currently does not embed them; they are available for future use.
+Use plain browser JavaScript, semantic HTML, and CSS. Follow the surrounding
+two-space indentation in HTML and JavaScript. Use `camelCase` for JavaScript
+functions and variables, `UPPER_SNAKE_CASE` for content collections, and
+kebab-case for CSS classes and DOM IDs. Prefer native HTML, especially
+`<details>` for disclosures, over JavaScript state or dependencies.
 
-## Key files
+Keep all visitor-facing copy and record data in `scripts/content.js`. Add a
+new content field only when the renderer can use it for every relevant entry.
+Preserve the script order in `index.html`: `content.js` must precede
+`script.js`.
 
-| File | Purpose |
-|------|---------|
-| `index.html` | Main HTML document with semantic sections |
-| `style.css` | All styling, including dark mode variables |
-| `content.js` | Data store for all site content |
-| `main.js` | DOM hydration logic |
-| `assets/img/svg/` | SVG icons (logo, brand marks) |
-| `assets/img/png/` | PNG icons (legacy format) |
+## Testing Guidelines
 
-## Absences
+Extend `tests/resume-renderer.test.js` when changing filtering or rendering
+logic. Tests use Node's built-in `assert` and should describe one observable
+behavior. Check desktop and narrow mobile layouts manually after CSS or shell
+changes; source checks do not prove responsive layout.
 
-- No build tool (Webpack, Vite, etc.)
-- No linting (ESLint, Stylelint)
-- No testing framework (Jest, Cypress)
-- No CSS preprocessor (Sass, Less)
-- No package manager (npm, yarn, pnpm)
+## Commit & Pull Request Guidelines
 
-<!-- opl-init:fp 8577c7c16cc31f21 -->
+Recent history uses concise conventional subjects such as `feat:`, `fix:`,
+and `chore:`; version commits use the release number. Keep commits scoped to
+one concern. Pull requests should describe the visible change, list the
+checks run, and include desktop and mobile screenshots for visual changes.
