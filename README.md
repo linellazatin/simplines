@@ -1,39 +1,58 @@
-# simplines — camalyn-style personal site template
+# simplines
 
-A static, data-driven personal site. Design language is carried over from
-[camalyn.org](https://www.camalyn.org): pure black `#000` background, pale
-cream `#ffffe0` text, Inter throughout, no filled cards, no shadows, no loud
-color — quiet
-typography and generous whitespace do the work.
+A static, data-driven one-page CV for Linel Lazatin. It presents selected
+work, personal projects, and education, with the full project catalogue at
+[openlines.dev](https://openlines.dev). Simplines is no longer maintained as a
+template or as an adaptation of another site; its current basis is the
+Openlines-inspired résumé record design.
 
-## Files
-- `index.html` — structure only, all text comes from `content.js`
-- `style.css` — all styling
-- `scripts/script.js` — renders the page from `content.js`; nothing here needs editing to reuse the template
-- `scripts/content.js` — **the only file you edit** to reuse this for someone else
+## Architecture
 
-## Reuse for a new person
-Edit `content.js` — `PROFILE`, `WORK`, `EDUCATION`, `PROJECTS`, `SKILLS`.
-No HTML/CSS/JS changes needed per entry. The page monogram (top-right) and
-`<title>` are derived automatically from `PROFILE.name`.
+The site deploys directly to Cloudflare Pages. It uses semantic HTML, CSS,
+and browser JavaScript only: no build step, framework, backend, or package
+manager.
 
-## What was preserved from camalyn.org
-- Black/cream palette, single-family Inter typography, generous negative space
-- The brief white "startup flash" on load
-- A quiet top-right monogram that opens a contact panel (bottom-left, barely-tinted, plain text — no card/shadow)
-- No buttons, badges, or filled backgrounds anywhere in the content
+- `index.html` provides the header, CV hero, and native `<details>` disclosure
+  shells.
+- `scripts/content.js` is the single source of editable profile, section,
+  skills, work, project, and education data.
+- `scripts/script.js` renders configured records, separating `featured: true`
+  entries from archived entries without owning disclosure state.
+- `style.css` defines the dark, hairline-led responsive record layout.
+- `assets/img/` stores the logo and SVG/PNG variants.
+- `tests/resume-renderer.test.js` verifies the featured/archive split.
 
-## What was adapted, and why
-camalyn.org is a single-sentence slideshow; a resume needs to be scannable,
-so this template keeps one calm hero statement (from `PROFILE.tagline`) and
-then flows into plain, hairline-divided sections instead of an auto-cycling
-carousel. The top-left rail is a **real** scroll-progress indicator (not a
-decorative slide-position slider) — it does exactly what it visually implies.
+## Editing content
+
+Edit `scripts/content.js`; entry-level changes should not require HTML or
+renderer edits. Set `featured: true` for items visible when a section opens.
+Section titles, archive labels, and the Openlines project link are configured
+in `SECTIONS`. Keep `content.js` loaded before `script.js` in `index.html`.
+
+## Preview and checks
+
+Serve the repository root with a static server:
+
+```sh
+python3 -m http.server 8000
+```
+
+Then open `http://localhost:8000`. Before publishing, run:
+
+```sh
+node tests/resume-renderer.test.js
+node --check scripts/content.js
+node --check scripts/script.js
+git diff --check
+```
+
+Check a desktop and narrow mobile viewport manually. Static checks do not
+prove responsive layout.
 
 ## How it came to be
 I was just testing how my small, local LLMs would analyze, and code with the given task of:
 ```text
-analyze reference site: https://www.camalyn.org/
+analyze reference site: https://anysite.page
 let us create a template based from the reference site - html + css. keep the design language intact.
 ```
 Out of the different small LLMs I can host (via [llama.cpp](https://github.com/ggml-org/llama.cpp)):
@@ -50,6 +69,7 @@ I was able to get `relatively good` results from both Qwen3.5 & Ornith1.5 - othe
 This is basically just a test, but went through with it and used it anyways.
 
 ## Deploy on Cloudflare Pages
+
 No build step. Point Cloudflare Pages at this directory:
 - Framework preset: **None**
 - Build command: *(leave blank)*
