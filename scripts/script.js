@@ -1,5 +1,4 @@
-// Renders the page from content.js. Edit content.js to reuse this template
-// for someone else - nothing in here needs to change.
+// Renders the configurable resume data. Native <details> owns disclosure state.
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -8,146 +7,65 @@ function el(tag, className, text) {
   return node;
 }
 
-function renderHero() {
-  document.getElementById("heroTagline").textContent = PROFILE.tagline;
-  document.getElementById("heroSub").textContent =
-    `${PROFILE.nickname}`;
-    // `${PROFILE.role} — ${PROFILE.location}`;
-    document.title = `${PROFILE.nickname}`;
-  }
-
-function renderEntry(item, { withUrl = false } = {}) {
-  const li = el("li", "entry");
-
-  const title = el("div", "entry-title");
-  if (item.accent) title.appendChild(el("span", `dot ${item.accent}`));
-  const titleText = withUrl && item.url ? el("a") : el("span");
-  titleText.textContent = item.title || item.text;
-  if (withUrl && item.url) {
-    titleText.href = item.url;
-    titleText.target = "_blank";
-    titleText.rel = "noopener";
-  }
-  title.appendChild(titleText);
-  li.appendChild(title);
-
-  const metaParts = [item.org, item.location, item.period].filter(Boolean);
-  if (metaParts.length) {
-    li.appendChild(el("div", "entry-meta", metaParts.join(" · ")));
-  }
-
-  if (item.note) {
-    li.appendChild(el("div", "entry-note", item.note));
-  }
-
-  return li;
+function partitionItems(items) {
+  return [items.filter((item) => item.featured), items.filter((item) => !item.featured)];
 }
 
-function renderList(id, items, opts) {
-  const list = document.getElementById(id);
-  const section = id.endsWith("List") ? id.slice(0, -4) : id;
-  items.forEach((item) => list.appendChild(renderEntry(item, opts)));
-  ADDITIONAL_CONTENT
-    .filter((item) => item.section === section)
-    .forEach((item) => list.appendChild(renderEntry(item, { ...opts, withUrl: true })));
-}
-
-function renderSkills() {
-  document.getElementById("skillsLine").textContent = SKILLS.join(" · ");
-}
-
-function renderFooter() {
-  const year = new Date().getFullYear();
-  document.getElementById("footerLine").textContent =
-    `© ${year} ${PROFILE.name} - all rights quietly reserved`;
-}
-
-function renderContactPanel() {
-  const panel = document.getElementById("contactPanel");
-
-  panel.appendChild(el("p", "contact-name", `${PROFILE.name}`));
-  panel.appendChild(el("p", null, PROFILE.location));
-
-  const emailLink = el("a", null, PROFILE.email);
-  emailLink.href = `mailto:${PROFILE.email}`;
-  const emailLine = el("p");
-  emailLine.appendChild(emailLink);
-  panel.appendChild(emailLine);
-
-  if (PROFILE.social && PROFILE.social.length) {
-    const links = el("p", "contact-links");
-    PROFILE.social.forEach(({ label, url }) => {
-      const a = el("a", null, label);
-      a.href = url;
-      a.target = "_blank";
-      a.rel = "noopener";
-      links.appendChild(a);
-    });
-    panel.appendChild(links);
-  }
-
-  const mark = document.getElementById("markToggle");
-  mark.setAttribute("aria-label", `${PROFILE.name}. — contact`);
-
-  function setOpen(open) {
-    panel.hidden = !open;
-    mark.setAttribute("aria-expanded", String(open));
-  }
-
-  mark.addEventListener("click", () => setOpen(panel.hidden));
-
-  document.addEventListener("click", (e) => {
-    if (!panel.hidden && !panel.contains(e.target) && !mark.contains(e.target)) {
-      setOpen(false);
-    }
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !panel.hidden) setOpen(false);
+function renderProfile() {
+  document.title = `${PROFILE.nickname} | ${PROFILE.role}`;
+  document.getElementById("brandName").textContent = PROFILE.nickname;
+  document.getElementById("heroTitle").textContent = PROFILE.role;
+  document.getElementById("heroSummary").textContent = PROFILE.summary;
+  document.getElementById("profileMeta").textContent = PROFILE.location;
+  document.getElementById("skillsLine").textContent = SKILLS.join(" / ");
+  document.getElementById("footerName").textContent = PROFILE.name;
+  document.getElementById("footerYear").textContent = `© ${new Date().getFullYear()}`;
+  const nav = document.getElementById("siteNav");
+  PROFILE.social.forEach(({ label, url }) => {
+    const link = el("a", null, label);
+    link.href = url;
+    if (!url.startsWith("mailto:")) { link.target = "_blank"; link.rel = "noopener"; }
+    nav.appendChild(link);
   });
 }
 
-function initScrollProgress() {
-  const fill = document.getElementById("progressFill");
-  function update() {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-    fill.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+function renderEntry(item) {
+  const entry = el("li", "record");
+  const title = item.url ? el("a", "record-title", item.title) : el("h3", "record-title", item.title);
+  if (item.url) { title.href = item.url; title.target = "_blank"; title.rel = "noopener"; }
+  entry.appendChild(title);
+  entry.appendChild(el("p", "record-note", item.note || item.org));
+  const aside = el("div", "record-aside");
+  const meta = [item.org, item.location, item.period].filter(Boolean).join(" · ");
+  if (meta) aside.appendChild(el("p", "record-meta", meta));
+  if (item.tags?.length) {
+    const tags = el("ul", "tags");
+    item.tags.forEach((tag) => tags.appendChild(el("li", null, tag)));
+    aside.appendChild(tags);
   }
-  window.addEventListener("scroll", update, { passive: true });
-  window.addEventListener("resize", update);
-  update();
+  entry.appendChild(aside);
+  return entry;
 }
 
-function initFadeIn() {
-  const targets = document.querySelectorAll(".hero, .block");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in-view");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
-  targets.forEach((t) => observer.observe(t));
+function renderSection(name, items) {
+  const config = SECTIONS[name];
+  document.getElementById(`${name}-title`).textContent = config.title;
+  document.getElementById(`${name}-summary`).textContent = config.moreLabel;
+  const [featured, archive] = partitionItems(items);
+  featured.forEach((item) => document.getElementById(`featured-${name}`).appendChild(renderEntry(item)));
+  archive.forEach((item) => document.getElementById(`more-${name}`).appendChild(renderEntry(item)));
+  document.getElementById(`${name}-disclosure`).hidden = archive.length === 0;
+  if (config.link) {
+    const link = document.getElementById(`${name}-link`);
+    link.textContent = config.link.label;
+    link.href = config.link.url;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.hidden = false;
+  }
 }
 
-function initTvFlash() {
-  const flash = document.querySelector(".tv-flash");
-  if (!flash) return;
-  flash.addEventListener("animationend", () => flash.remove());
-}
-
-renderHero();
-renderList("workList", WORK, { withUrl: false });
-renderList("projectsList", PROJECTS, { withUrl: true });
-renderList("educationList", EDUCATION, { withUrl: false });
-renderSkills();
-renderFooter();
-renderContactPanel();
-initScrollProgress();
-initFadeIn();
-initTvFlash();
+renderProfile();
+renderSection("work", WORK);
+renderSection("projects", PROJECTS);
+renderSection("education", EDUCATION);
