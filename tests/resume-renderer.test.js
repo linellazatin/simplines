@@ -2,8 +2,12 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const vm = require("node:vm");
 
+assert.ok(fs.existsSync("public/index.html"));
+assert.ok(fs.existsSync("public/robots.txt"));
+assert.ok(fs.existsSync("public/llms.txt"));
+
 const source = fs
-  .readFileSync("scripts/script.js", "utf8")
+  .readFileSync("public/scripts/script.js", "utf8")
   .replace(/(?:renderHero|renderProfile)\(\);[\s\S]*$/, "");
 const context = {};
 

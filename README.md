@@ -12,37 +12,37 @@ The site deploys directly to Cloudflare Pages. It uses semantic HTML, CSS,
 and browser JavaScript only: no build step, framework, backend, or package
 manager.
 
-- `index.html` provides the header, CV hero, and native `<details>` disclosure
-  shells.
-- `scripts/content.js` is the single source of editable profile, section,
+- `public/index.html` provides the header, CV hero, and native `<details>` disclosure shells.
+- `public/scripts/content.js` is the single source of editable profile, section,
   skills, work, project, and education data.
-- `scripts/script.js` renders configured records, separating `featured: true`
+- `public/scripts/script.js` renders configured records, separating `featured: true`
   entries from archived entries without owning disclosure state.
-- `style.css` defines the dark, hairline-led responsive record layout.
-- `assets/img/` stores the logo and SVG/PNG variants.
-- `tests/resume-renderer.test.js` verifies the featured/archive split.
+- `public/style.css` defines the dark, hairline-led responsive record layout.
+- `public/assets/img/` stores the logo and SVG/PNG variants.
+- `public/robots.txt` and `public/llms.txt` describe the crawl and AI-readable public surface.
+- `tests/resume-renderer.test.js` verifies the featured/archive split and public tree.
 
 ## Editing content
 
-Edit `scripts/content.js`; entry-level changes should not require HTML or
+Edit `public/scripts/content.js`; entry-level changes should not require HTML or
 renderer edits. Set `featured: true` for items visible when a section opens.
 Section titles, archive labels, and the Openlines project link are configured
-in `SECTIONS`. Keep `content.js` loaded before `script.js` in `index.html`.
+in `SECTIONS`. Keep `content.js` loaded before `script.js` in `public/index.html`.
 
 ## Preview and checks
 
-Serve the repository root with a static server:
+Serve the public directory with a static server:
 
 ```sh
-python3 -m http.server 8000
+python3 -m http.server 8000 --directory public
 ```
 
 Then open `http://localhost:8000`. Before publishing, run:
 
 ```sh
 node tests/resume-renderer.test.js
-node --check scripts/content.js
-node --check scripts/script.js
+node --check public/scripts/content.js
+node --check public/scripts/script.js
 git diff --check
 ```
 
@@ -70,12 +70,13 @@ This is basically just a test, but went through with it and used it anyways.
 
 ## Deploy on Cloudflare Pages
 
-No build step. Point Cloudflare Pages at this directory:
+No build step. Point Cloudflare Pages at the `public/` directory:
 - Framework preset: **None**
 - Build command: *(leave blank)*
-- Build output directory: `/`
+- Build output directory: `public`
+- Root directory: *(leave blank)*
 
 Or via Wrangler:
 ```
-npx wrangler pages deploy . --project-name=<your-project>
+npx wrangler pages deploy public --project-name=<your-project>
 ```
