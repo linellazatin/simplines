@@ -36,7 +36,7 @@ function renderEntry(item) {
   entry.appendChild(title);
   entry.appendChild(el("p", "record-note", item.note || item.org));
   const aside = el("div", "record-aside");
-  const meta = [item.org, item.location, item.period].filter(Boolean).join(" · ");
+  const meta = [item.location, item.period].filter(Boolean).join(" · ");
   if (meta) aside.appendChild(el("p", "record-meta", meta));
   if (item.tags?.length) {
     const tags = el("ul", "tags");
