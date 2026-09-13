@@ -1,0 +1,18 @@
+# Lines
+
+> Resume and professional profile for Linel Lazatin, a Technical Architect in the Philippines.
+
+## About
+
+Lines presents work experience, personal projects, education, and areas of focus in cloud infrastructure, systems reliability, and developer tools.
+
+## Links
+
+- Projects: https://openlines.dev
+- GitHub: https://github.com/linellazatin
+- LinkedIn: https://www.linkedin.com/in/linesl
+- Email: mailto:me@llazat.in
+
+## Notes
+
+The page is a static résumé. The current role and project information are maintained in the page's content source.

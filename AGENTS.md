@@ -5,14 +5,15 @@
 This is a static, one-page résumé site. There is no package manifest, build
 pipeline, backend, or framework.
 
-- `index.html` is the semantic page shell and loads data before the renderer.
-- `scripts/content.js` is the editable source of truth for profile data,
+- `public/index.html` is the semantic page shell and loads data before the renderer.
+- `public/scripts/content.js` is the editable source of truth for profile data,
   sections, skills, and résumé records. Use `featured: true` for items shown
   before an archive disclosure.
-- `scripts/script.js` hydrates the shell and separates featured and archived
+- `public/scripts/script.js` hydrates the shell and separates featured and archived
   records. Keep it generic; do not add entry-specific HTML here.
-- `style.css` owns the responsive Openlines-derived visual system.
-- `assets/img/` contains the logo and supporting SVG/PNG variants.
+- `public/style.css` owns the responsive Openlines-derived visual system.
+- `public/assets/img/` contains the logo and supporting SVG/PNG variants.
+- `public/robots.txt` and `public/llms.txt` define the public crawler and AI-readable surface.
 - `tests/resume-renderer.test.js` is a Node assertion for renderer behavior.
 
 ## Build, Test, and Development Commands
@@ -28,8 +29,8 @@ off a change:
 
 ```sh
 node tests/resume-renderer.test.js
-node --check scripts/content.js
-node --check scripts/script.js
+node --check public/scripts/content.js
+node --check public/scripts/script.js
 git diff --check
 ```
 
@@ -41,9 +42,9 @@ functions and variables, `UPPER_SNAKE_CASE` for content collections, and
 kebab-case for CSS classes and DOM IDs. Prefer native HTML, especially
 `<details>` for disclosures, over JavaScript state or dependencies.
 
-Keep all visitor-facing copy and record data in `scripts/content.js`. Add a
+Keep all visitor-facing copy and record data in `public/scripts/content.js`. Add a
 new content field only when the renderer can use it for every relevant entry.
-Preserve the script order in `index.html`: `content.js` must precede
+Preserve the script order in `public/index.html`: `content.js` must precede
 `script.js`.
 
 ## Testing Guidelines
