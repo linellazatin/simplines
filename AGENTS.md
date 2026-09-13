@@ -2,20 +2,17 @@
 
 ## What this is
 
-`simplines` is a one-page, data-driven résumé for Linel Lazatin. It is a pure
-static site with semantic HTML, CSS, and browser JavaScript. There is no
-framework, package manifest, backend, build pipeline, lint command, or typecheck
-command.
+`simplines` is a one-page, data-driven résumé for Linel Lazatin. It is a pure static site built with semantic HTML, CSS, and browser JavaScript. There is no framework, backend, package manager, build pipeline, lint command, or typecheck command.
 
 ## Commands
 
-Preview the deployed surface locally:
+Preview the visitor-served site locally:
 
 ```sh
 python3 -m http.server 8000 --directory public
 ```
 
-Run the repository checks from the repository root:
+Run repository checks from the repository root:
 
 ```sh
 node tests/resume-renderer.test.js
@@ -24,45 +21,34 @@ node --check public/scripts/script.js
 git diff --check
 ```
 
-The test uses Node built-ins and does not require installation. For visual
-changes, inspect both desktop and narrow mobile layouts in a browser.
+The test uses Node built-ins and needs no installation. For visual changes, manually inspect desktop and narrow mobile layouts in a browser.
 
 ## Architecture
 
-- `public/index.html` is the page shell, metadata surface, landmarks, and
-  native `<details>` disclosure structure.
-- `public/scripts/content.js` owns editable profile, social links, sections,
-  skills, work, projects, and education data.
-- `public/scripts/script.js` hydrates the shell and renders records. It splits
-  `featured: true` records from archived records and must remain entry-agnostic.
-- `public/styles/style.css` owns the responsive visual system.
-- `public/assets/img/` contains logo and image variants.
-- `public/robots.txt` and `public/llms.txt` describe the public crawler and
-  AI-readable surface.
+- `public/index.html` is the public page shell. It owns metadata, landmarks, and native `<details>` disclosure structure.
+- `public/scripts/content.js` is the editable source of truth for profile data, social links, sections, skills, work, projects, and education.
+- `public/scripts/script.js` hydrates the shell and renders records. It separates `featured: true` records from archived records and should remain entry-agnostic.
+- `public/styles/style.css` contains the responsive visual system.
+- `public/assets/img/` contains the logo and image variants.
+- `public/robots.txt` and `public/llms.txt` define the public crawler and AI-readable surface.
 
-`content.js` must load before `script.js` in `public/index.html`. Content edits
-should normally require changes only to `content.js`; use `featured: true` for
-records shown before an archive disclosure.
+Keep `content.js` loaded before `script.js` in `public/index.html`. Content-only edits normally belong in `content.js`; use `featured: true` for records shown before an archive disclosure. Do not move disclosure state into the renderer.
 
 ## Configuration and deployment
 
-Deploy `public/` directly with Cloudflare Pages. Use framework preset **None**,
-leave the build command blank, set build output directory to `public`, and
-leave the root directory blank. Wrangler equivalent:
+Deploy `public/` directly with Cloudflare Pages. Use framework preset **None**, leave the build command and root directory blank, and set build output directory to `public`.
+
+Equivalent Wrangler command:
 
 ```sh
 npx wrangler pages deploy public --project-name=<your-project>
 ```
 
-Only `public/` is visitor-served. Repository files such as `.gitignore`, tests,
-docs, and `README.md` must remain outside that directory.
+Only `public/` is visitor-served. Keep repository documentation, tests, and root configuration files outside that directory.
 
 ## Testing and operational quirks
 
-The renderer depends on browser DOM APIs and is not executed by the Node test;
-the test extracts and checks the pure `partitionItems` behavior. Static checks
-therefore do not prove rendering or responsive behavior. Keep external links
-and public profile data intentional because they are rendered directly.
+`tests/resume-renderer.test.js` extracts and tests the pure `partitionItems` behavior because the renderer depends on browser DOM APIs. Passing static checks therefore does not prove rendering or responsive behavior. Keep externally rendered links and public profile data intentional.
 
 ## Key files
 
@@ -72,5 +58,4 @@ and public profile data intentional because they are rendered directly.
 - `public/styles/style.css`: layout and styling
 - `tests/resume-renderer.test.js`: Node assertion coverage
 - `docs/superpowers/`: historical design and implementation documents
-
-<!-- opl-init:fp c22dae44b1f68364 -->
+<!-- opl-init:fp b26aa1c3f774a24c -->
