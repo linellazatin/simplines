@@ -24,7 +24,7 @@ const WORK = [
 ];
 
 const PROJECTS = [
-  { title: "nanomneme", url: "https://github.com/linellazatin/nanomneme", note: "Small, deterministic, local-first SQLite memory core", tags: ["sqlite", "memory", "cli"], featured: true },
+  { title: "nanomneme", url: "https://nanomneme.openlines.dev", note: "Small, deterministic, local-first SQLite memory core", tags: ["sqlite", "memory", "cli"], featured: true },
   { title: "eurysx", url: "https://github.com/linellazatin/eurysx", note: "Local-first usage observability for agent harnesses", tags: ["agents", "observability", "cli"], featured: true },
   { title: "opl-pi-sht (ShouldHaveThat)", url: "https://github.com/linellazatin/opl-pi-sht", note: "Practical extensions for Pi coding agent workflows", tags: ["pi", "agent-tools", "extensions"], featured: true },
 ];
