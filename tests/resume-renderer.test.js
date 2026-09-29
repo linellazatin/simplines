@@ -5,6 +5,7 @@ const vm = require("node:vm");
 assert.ok(fs.existsSync("public/index.html"));
 assert.ok(fs.existsSync("public/robots.txt"));
 assert.ok(fs.existsSync("public/llms.txt"));
+assert.ok(fs.existsSync("public/sitemap.xml"));
 
 const source = fs
   .readFileSync("public/scripts/script.js", "utf8")
