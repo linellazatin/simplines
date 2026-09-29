@@ -5,6 +5,7 @@
 ## About
 
 Lines presents work experience, personal projects, education, and areas of focus in cloud infrastructure, systems reliability, and developer tools.
+The contents in this page are rendered client-side on https://llazat.in/, so the profile and projects links are listed here for crawlers and agents that do not execute JavaScript.
 
 ## Links
 
