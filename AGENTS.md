@@ -27,7 +27,7 @@ The test uses Node built-ins and needs no installation. For visual changes, manu
 
 - `public/index.html` is the public page shell. It owns metadata, landmarks, and native `<details>` disclosure structure.
 - `public/scripts/content.js` is the editable source of truth for profile data, social links, sections, skills, work, projects, and education.
-- `public/scripts/script.js` hydrates the shell and renders records. It separates `featured: true` records from archived records and should remain entry-agnostic.
+- `public/scripts/script.js` hydrates the shell and renders records. It places optional location, period, and organization details in the right column, separates `featured: true` records from archived records, and should remain entry-agnostic.
 - `public/styles/style.css` contains the responsive visual system.
 - `public/assets/img/` contains the logo and image variants.
 - `public/robots.txt` and `public/llms.txt` define the public crawler and AI-readable surface.

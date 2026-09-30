@@ -1,22 +1,14 @@
 # simplines
 
-A static, data-driven one-page CV for Linel Lazatin. It presents selected
-work, personal projects, and education, with the full project catalogue at
-[openlines.dev](https://openlines.dev). Simplines is no longer maintained as a
-template or as an adaptation of another site; its current basis is the
-Openlines-inspired résumé record design.
+A static, data-driven one-page CV for Linel Lazatin. It presents selected work, personal projects, and education, with the full project catalogue at [openlines.dev](https://openlines.dev). Simplines is no longer maintained as a template or as an adaptation of another site; its current basis is the Openlines-inspired résumé record design.
 
 ## Architecture
 
-The site deploys directly to Cloudflare Pages. It uses semantic HTML, CSS,
-and browser JavaScript only: no build step, framework, backend, or package
-manager.
+The site deploys directly to Cloudflare Pages. It uses semantic HTML, CSS, and browser JavaScript only: no build step, framework, backend, or package manager.
 
 - `public/index.html` provides the header, CV hero, and native `<details>` disclosure shells.
-- `public/scripts/content.js` is the single source of editable profile, section,
-  skills, work, project, and education data.
-- `public/scripts/script.js` renders configured records, separating `featured: true`
-  entries from archived entries without owning disclosure state.
+- `public/scripts/content.js` is the single source of editable profile, section, skills, work, project, and education data.
+- `public/scripts/script.js` renders configured records, placing optional location, period, and organization details in the right column, and separating `featured: true` entries from archived entries without owning disclosure state.
 - `public/style.css` defines the dark, hairline-led responsive record layout.
 - `public/assets/img/` stores the logo and SVG/PNG variants.
 - `public/robots.txt` and `public/llms.txt` describe the crawl and AI-readable public surface.
@@ -24,10 +16,7 @@ manager.
 
 ## Editing content
 
-Edit `public/scripts/content.js`; entry-level changes should not require HTML or
-renderer edits. Set `featured: true` for items visible when a section opens.
-Section titles, archive labels, and the Openlines project link are configured
-in `SECTIONS`. Keep `content.js` loaded before `script.js` in `public/index.html`.
+Edit `public/scripts/content.js`; entry-level changes should not require HTML or renderer edits. Set `featured: true` for items visible when a section opens. Section titles, archive labels, and the Openlines project link are configured in `SECTIONS`. Keep `content.js` loaded before `script.js` in `public/index.html`.
 
 ## Preview and checks
 
@@ -46,8 +35,7 @@ node --check public/scripts/script.js
 git diff --check
 ```
 
-Check a desktop and narrow mobile viewport manually. Static checks do not
-prove responsive layout.
+Check a desktop and narrow mobile viewport manually. Static checks do not prove responsive layout.
 
 ## How it came to be
 I was just testing how my small, local LLMs would analyze, and code with the given task of:

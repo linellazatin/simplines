@@ -34,10 +34,11 @@ function renderEntry(item) {
   const title = item.url ? el("a", "record-title", item.title) : el("h3", "record-title", item.title);
   if (item.url) { title.href = item.url; title.target = "_blank"; title.rel = "noopener"; }
   entry.appendChild(title);
-  entry.appendChild(el("p", "record-note", item.note || item.org));
+  if (item.note) entry.appendChild(el("p", "record-note", item.note));
   const aside = el("div", "record-aside");
   const meta = [item.location, item.period].filter(Boolean).join(" · ");
   if (meta) aside.appendChild(el("p", "record-meta", meta));
+  if (item.org) aside.appendChild(el("p", "record-org", item.org));
   if (item.tags?.length) {
     const tags = el("ul", "tags");
     item.tags.forEach((tag) => tags.appendChild(el("li", null, tag)));

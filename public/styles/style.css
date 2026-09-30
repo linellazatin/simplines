@@ -34,6 +34,7 @@ h1 { max-width: 13ch; margin-bottom: 1.5rem; font-size: clamp(3rem, 7.2vw, 6.6re
 a.record-title::after, .catalogue-link::after { content: " ↗"; color: var(--link); font-size: .8em; }
 .record-note { margin: 0; color: #d1d1bb; }
 .record-aside p { margin: 0; }
+.record-aside .record-org { margin-top: .35rem; }
 .tags { display: flex; flex-wrap: wrap; gap: .35rem .7rem; margin: .65rem 0 0; padding: 0; list-style: none; }
 .tags li::before { content: "#"; color: var(--link); }
 .archive { border-bottom: 1px solid var(--rule); }
@@ -42,5 +43,5 @@ a.record-title::after, .catalogue-link::after { content: " ↗"; color: var(--li
 .archive[open] summary::after { content: "−"; }
 .catalogue-link { display: block; padding: 1.5rem 0 0; color: var(--muted); font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 footer { justify-content: space-between; padding-block: 1.25rem 2rem; border-top: 1px solid var(--rule); }
-@media (max-width: 700px) { .site-header, main, footer { width: min(100% - 2.5rem, 78rem); } .site-header { align-items: flex-start; } nav { flex-wrap: wrap; justify-content: flex-end; gap: .75rem; } .hero { padding-top: 5rem; } .record { grid-template-columns: 1fr; gap: .65rem; padding-left: 1rem; } .record-aside { display: flex; flex-wrap: wrap; align-items: baseline; gap: .65rem 1rem; } .tags { margin: 0; } footer { align-items: flex-start; flex-direction: column; gap: .35rem; } }
+@media (max-width: 700px) { .site-header, main, footer { width: min(100% - 2.5rem, 78rem); } .site-header { align-items: flex-start; } nav { flex-wrap: wrap; justify-content: flex-end; gap: .75rem; } .hero { padding-top: 5rem; } .record { grid-template-columns: 1fr; gap: .65rem; padding-left: 1rem; } .record-aside { display: flex; flex-wrap: wrap; align-items: baseline; gap: .65rem 1rem; } .record-org { flex-basis: 100%; } .tags { margin: 0; } footer { align-items: flex-start; flex-direction: column; gap: .35rem; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
