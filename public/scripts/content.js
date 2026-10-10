@@ -24,9 +24,9 @@ const WORK = [
 ];
 
 const PROJECTS = [
-  { title: "nanomneme", url: "https://nanomneme.openlines.dev", note: "Small, deterministic, local-first SQLite memory core", tags: ["sqlite", "memory", "cli"], featured: true },
-  { title: "eurysx", url: "https://github.com/linellazatin/eurysx", note: "Local-first usage observability for agent harnesses", tags: ["agents", "observability", "cli"], featured: true },
-  { title: "opl-pi-sht (ShouldHaveThat)", url: "https://github.com/linellazatin/opl-pi-sht", note: "Practical extensions for Pi coding agent workflows", tags: ["pi", "agent-tools", "extensions"], featured: true },
+  { title: "nanomneme", url: "https://nanomneme.openlines.dev", note: "Small, deterministic, local-first SQLite memory core.", tags: ["sqlite", "memory", "cli"], featured: true },
+  { title: "opl-pi-sht (ShouldHaveThat)", url: "https://github.com/linellazatin/opl-pi-sht", note: "Practical extensions for Pi coding agent workflows.", tags: ["pi", "agent-tools", "extensions"], featured: true },
+  { title: "skills", url: "https://github.com/linellazatin/skills", note: "Agent skills that follow your workflow.", tags: ["agents", "skills", "engineering"], featured: true },
 ];
 
 const EDUCATION = [{ title: "BS Information Technology", org: "Pamantasan ng Lungsod ng Maynila (PLM)", location: "Manila, PH", period: "Jun 2007 - Apr 2011", featured: true }];
